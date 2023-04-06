@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigation } from 'react-router-dom';
+import LoadingSpinner from './LoadingSpinner';
 
 const BookDetails = () => {
     const bookData = useLoaderData()
@@ -7,6 +8,14 @@ const BookDetails = () => {
     console.log(bookData)
     const { image, title, desc, authors, publisher, year, rating, url, price } =
         bookData
+
+    const navigation = useNavigation();
+    console.log(navigation.state);
+    if (navigation.state === 'loading') {
+        return <LoadingSpinner />
+    }
+
+
     return (
         <div className='px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20'>
             {/* Container Box */}
